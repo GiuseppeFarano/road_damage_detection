@@ -1,0 +1,13 @@
+{% extends 'index.html' %}
+
+{% block obtain_images %}
+    <!-- Messaggio sul successo o meno dell'azione di ottenimento delle immagini -->
+    <div id="message">{{text}}</div>
+
+    <!-- Pulsante che l'utente deve premere per far partire l'analisi dal modello di ML delle immagini ottenute-->
+    {% if flag %}
+    <form id="analizza" action="/analizza_immagini" method="get">
+        <button id="analizza_button" type="submit">Avvia Analisi</button>  <!-- Trigger del controller inference.py -->
+    </form>
+    {% endif %}
+{% endblock %}

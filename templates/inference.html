@@ -1,0 +1,48 @@
+{% extends 'obtain_images.html' %}
+
+{% block damages_statistics %}
+    <!-- Mostro il report con il conteggio per le tipologie di danno -->
+    {% if total_damages %}
+    <div id="report-div">
+        <h2>Danni totali: {{total_damages}}</h2>
+        <div id="report" class="report">
+            <img src="{{ url_for('static', filename='damage_histogram.png') }}" alt="Grafico report">
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}
+
+{% block inference %}
+<div class="right-panel">
+    <div id="address-div">
+        <h2 id="address">Risultati da: {{ partenza }}  <br> a: {{ destinazione }}</h2>
+    </div>
+
+    <!-- Mostro le immagini ordinate per score -->
+    {% if images_data %}
+    <!-- Carosello di immagini -->
+    <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            {% for item in images_data %}
+            <div class="carousel-item {% if loop.first %}active{% endif %}">
+                <!-- Image and caption -->
+                <h3 class="text-center">{{ item.road_name }} {{ item.street_number }}, {{ item.city }} {{ item.photo_date }}</h3>
+                <img src="{{ url_for('inference.serve_image', filename=item.image_name) }}" class="d-block img-fluid custom-image" alt="{{ item.image_name }}">
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Carousel Controls -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#imageCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Precedente</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#imageCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Successivo</span>
+        </button>
+    </div>
+    {% endif %}
+</div>
+
+{% endblock %}
