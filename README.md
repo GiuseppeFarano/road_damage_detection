@@ -39,8 +39,8 @@ The received images are pre-processed and passed as input to the Yolov7 model. T
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/GiuseppeFarano/road_classification.git
-cd road_classification
+git clone https://github.com/GiuseppeFarano/road_damage_detection.git
+cd road_damage_detection
  ```
 2. Set your Google Maps API in the file model/inference.py and your Google Cloud Platform API in the file model/obtain_images.py
 ```bash
